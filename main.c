@@ -7,15 +7,11 @@ int main() {
     t.dateDue = "12/24/2023";
     printf( "struct t's due date is %s\n", t.dateDue );
     
-
     
-    struct taskNode *tasks = (struct taskNode*)malloc(sizeof(taskNode));
+    struct taskNode *tasks = (struct taskNode*)malloc(sizeof(struct taskNode));
     tasks[0] = t;
-    printf("dateDue of tasks[0] = %s\n", tasks[0].dateDue );
-
-
-
+    tasks[0].dateDue = "01/23/2023";
+    printf( "struct t's due date is %s\n", t.dateDue );
+    printf( "struct t's due date is %s\n", tasks[0].dateDue );
     free(tasks);
-
-    return 0;
 } 
