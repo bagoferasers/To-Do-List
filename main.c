@@ -3,19 +3,19 @@
 #include <unistd.h>
 #include "heapsort.h"
 
-int main() {
+int main( ) {
 
     // find file path and open file
-    char wd[256] = __FILE__;
-    char newFilePath[256];
-    for( int i = 0; i < (strlen(wd) - 6); i++ ){
-        newFilePath[i] = wd[i];
+    char wd[ 256 ] = __FILE__;
+    char newFilePath[ 256 ];
+    for( int i = 0; i < ( strlen( wd ) - 6 ); i++ ){
+        newFilePath[ i ] = wd[ i ];
     }
-    strcat(newFilePath, "\\data.csv");
+    strcat( newFilePath, "\\data.csv" );
     FILE* f = fopen( newFilePath, "r+" );
 
     // if can't find file, output and return
-    if(f == NULL) {
+    if( f == NULL ) {
         printf( "Can't open file\n" );
         return -1;
     }
@@ -42,24 +42,24 @@ int main() {
         t2.description = "This is the description";
         t2.dateDue = "04/24/2024";
     
-        tasks[0] = t1;
-        tasks[1] = t2;
+        tasks[ 0 ] = t1;
+        tasks[ 1 ] = t2;
 
-        printf("Printing due dates:\n");
+        printf( "Printing due dates:\n" );
         int j = 0;
-        while(1){
-            if(tasks[j].name == NULL)
+        while( 1 ){
+            if( tasks[ j ].name == NULL )
                 break;
             else{
-                printf("\ttasks[%d].dateDue = %s\n", j, tasks[j].dateDue);
+                printf( "\ttasks[ %d ].dateDue = %s\n", j, tasks[ j ].dateDue );
                 j++;
             }
         }
-        printf("number of tasks is %d\n", j);
+        printf( "number of tasks is %d\n", j );
 
     }
 
 
-    fclose(f);
+    fclose( f );
     return 0;
 }
