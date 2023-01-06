@@ -52,5 +52,9 @@ void buildMaxHeap( struct taskNode s[ ], int n ) {
     @param n : size of heap.
 */
 void heapSort( struct taskNode s[ ], int n ) {
-    printf("hi");
+    buildMaxHeap( s, n );
+    for( int i = n / 2 - 1; i >= 0; i-- ) {
+        swap( &s[ i ], &s[ 0 ] );
+        heapify( s, i );
+    }
 }
