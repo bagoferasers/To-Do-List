@@ -20,9 +20,7 @@ void maxHeapify( struct taskNode s[ ], int i ){
     }
     // if largest isn't i, exchange root with i and maxHeapify
     if( largest != i ) {
-        struct taskNode temp = s[ i ];
-        s[ i ] = s[ largest ];
-        s[ largest ] = temp;
+        swap( &s[ i ], &s[ largest ] );
         maxHeapify( s, largest );
     }
 }
