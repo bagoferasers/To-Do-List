@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "heapsort.h"
 
 int main() {
@@ -7,8 +8,12 @@ int main() {
     t.dateDue = "12/24/2023";
     printf( "struct t's due date is %s\n", t.dateDue );
     
-    
-    struct taskNode *tasks = (struct taskNode*)malloc(sizeof(struct taskNode));
+    // onload array with tasks from csv if applicable
+    FILE* f = fopen( "data.csv", "rw" );
+
+
+
+    struct taskNode* tasks = (struct taskNode*)malloc(sizeof(taskNode));
     tasks[0] = t;
     tasks[0].dateDue = "01/23/2023";
     printf( "struct t's due date is %s\n", t.dateDue );
