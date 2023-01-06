@@ -56,3 +56,12 @@ void heapSort( struct taskNode s[ ], int n ) {
         heapify( s, i );
     }
 }
+
+/*
+    insertNode function inserts a taskNode into the heap.
+    @param s : array of taskNode structures.
+    @param t : taskNode to be inserted.
+*/
+void insertNode( struct taskNode s[ ], struct taskNode t ){
+    //
+}

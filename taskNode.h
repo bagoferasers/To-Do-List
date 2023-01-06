@@ -1,3 +1,6 @@
+#ifndef _taskNode_h
+#define _tasknode_h
+
 struct taskNode
 {
     int priority;
@@ -8,3 +11,4 @@ struct taskNode
     char* dateDue;
 } taskNode;
 
+#endif
