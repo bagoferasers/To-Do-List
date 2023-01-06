@@ -13,5 +13,8 @@ int main() {
     tasks[0].dateDue = "01/23/2023";
     printf( "struct t's due date is %s\n", t.dateDue );
     printf( "struct t's due date is %s\n", tasks[0].dateDue );
+
+
     free(tasks);
+    return 0;
 } 
