@@ -8,7 +8,6 @@
 int main( ) {
 
     // find file path and open file
-    char wd[ 256 ] = __FILE__;
     FILE* f = fopen( "data.csv", "r+" );
 
     // if can't find file, output and return
@@ -30,7 +29,6 @@ int main( ) {
         t1.name = "Task 1";
         t1.description = "This is the description";
         t1.dateDue = "12/25/2023";
-
         tasks[ 0 ] = t1;
 
         //tasks[ 3 ] = buildNode(1,1,1,"bear task","descripty description", "12/12/1220");

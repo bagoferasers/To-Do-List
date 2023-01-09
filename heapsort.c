@@ -6,7 +6,7 @@
     @param s : array of taskNode structures.
     @param i: subtree rooted at i.
 */
-void maxHeapify( struct taskNode s[ ], int i ){
+void maxHeapify( struct taskNode* s, int i ){
     int largest = i;
     int left = 2 * i;
     int right = 2 * i + 1;
@@ -20,7 +20,10 @@ void maxHeapify( struct taskNode s[ ], int i ){
     }
     // if largest isn't i, exchange root with i and maxHeapify
     if( largest != i ) {
-        swap( &s[ i ], &s[ largest ] );
+        struct taskNode temp;
+        temp = s[ i ];
+        s[ i ] = s[ largest ];
+        s[ largest ] = temp;
         maxHeapify( s, largest );
     }
 }
@@ -31,11 +34,11 @@ void maxHeapify( struct taskNode s[ ], int i ){
     @param s : array of taskNode structures.
     @param n : size of heap.
 */
-void buildMaxHeap( struct taskNode s[ ], int n ) {
+void buildMaxHeap( struct taskNode* s, int n ) {
     n = sizeof( s );
     int last = ( n / 2 ) - 1;
     for( int i = last; i >= 0; i-- ) {
-        heapify( s, i );
+        maxHeapify( s, i );
     }
 }
 
@@ -49,11 +52,14 @@ void buildMaxHeap( struct taskNode s[ ], int n ) {
     @param s : array of taskNode structures.
     @param n : size of heap.
 */
-void heapSort( struct taskNode s[ ], int n ) {
+void heapSort( struct taskNode* s, int n ) {
     buildMaxHeap( s, n );
     for( int i = n / 2 - 1; i >= 0; i-- ) {
-        swap( &s[ i ], &s[ 0 ] );
-        heapify( s, i );
+        struct taskNode temp;
+        temp = s[ i ];
+        s[ i ] = s[ 0 ];
+        s[ 0 ] = temp;
+        maxHeapify( s, i );
     }
 }
 
@@ -62,7 +68,7 @@ void heapSort( struct taskNode s[ ], int n ) {
     @param s : array of taskNode structures.
     @param t : taskNode to be inserted.
 */
-void insertNode( struct taskNode s[ ], struct taskNode t ){
+void insertNode( struct taskNode* s, struct taskNode t ){
     //
 }
 
