@@ -18,31 +18,26 @@ int main( ) {
 
     // else begin program
     else {
-
+        
         //need to find out how many tasks are in tasknode with input from csv
-        struct taskNode tasks[ 10 ];
+        //and replace "10" with the #
+        struct taskNode* tasks = malloc( 10 * sizeof( struct taskNode ) );
 
-        struct taskNode t1;
-        t1.priority = 5;
-        t1.timeInMinutes = 20;
-        t1.timeInHours = 0;
-        t1.name = "Task 1";
-        t1.description = "This is the description";
-        t1.dateDue = "12/25/2023";
-        tasks[ 0 ] = t1;
-
-        //tasks[ 3 ] = buildNode(1,1,1,"bear task","descripty description", "12/12/1220");
-
-
-        printf( "Printing tasks:\n" );
+        //testing tasknode inserts
+        struct taskNode t1 = buildNode(1,1,1,"bear task","descripty description", "12/12/1220");
+        insertNode( tasks, t1 );
+        struct taskNode t2 = buildNode(2,2,2,"my task","i will not be describing this", "01/01/1220");
+        insertNode( tasks, t2 );
+        
+        //printing tasks
         int j = 0;
-        while( isalpha(tasks[ j ].name[0]) ){
+        while(  tasks[ j ].dateDue != NULL && isalpha(tasks[ j ].name[0] ) ){
+            printf("%s is %s\n", tasks[ j ].name, tasks[ j ].description);
             j++;
         }
-        printf( "number of tasks is %d\n", j );
+
+        free(tasks);
     }
-
-
     fclose( f );
     return 0;
 }

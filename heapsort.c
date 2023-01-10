@@ -1,4 +1,6 @@
 #include "heapsort.h"
+#include <ctype.h>
+#include <stdio.h>
 
 /*
     maxHeapify function used to maintain the max-heap property.
@@ -68,8 +70,14 @@ void heapSort( struct taskNode* s, int n ) {
     @param s : array of taskNode structures.
     @param t : taskNode to be inserted.
 */
-void insertNode( struct taskNode* s, struct taskNode t ){
-    //
+void insertNode( struct taskNode* s, struct taskNode t ) {
+    //check to see how many tasks are in s
+    int j = 0;
+    while( s[ j ].dateDue != NULL && isalpha( s[ j ].name[0] ) ){
+        j++;
+    }
+    //insert node at position after j
+    s[ j ] = t;
 }
 
 /*
