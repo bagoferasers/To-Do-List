@@ -8,7 +8,8 @@
     @param s : array of taskNode structures.
     @param i: subtree rooted at i.
 */
-void maxHeapify( struct taskNode* s, int i ){
+void maxHeapify( struct taskNode* s, int i )
+{
     int largest = i;
     int left = 2 * i;
     int right = 2 * i + 1;
@@ -36,7 +37,8 @@ void maxHeapify( struct taskNode* s, int i ){
     @param s : array of taskNode structures.
     @param n : size of heap.
 */
-void buildMaxHeap( struct taskNode* s, int n ) {
+void buildMaxHeap( struct taskNode* s, int n ) 
+{
     n = sizeof( s );
     int last = ( n / 2 ) - 1;
     for( int i = last; i >= 0; i-- ) {
@@ -54,9 +56,11 @@ void buildMaxHeap( struct taskNode* s, int n ) {
     @param s : array of taskNode structures.
     @param n : size of heap.
 */
-void heapSort( struct taskNode* s, int n ) {
+void heapSort( struct taskNode* s, int n ) 
+{
     buildMaxHeap( s, n );
-    for( int i = n / 2 - 1; i >= 0; i-- ) {
+    for( int i = n / 2 - 1; i >= 0; i-- ) 
+    {
         struct taskNode temp;
         temp = s[ i ];
         s[ i ] = s[ 0 ];
@@ -70,12 +74,12 @@ void heapSort( struct taskNode* s, int n ) {
     @param s : array of taskNode structures.
     @param t : taskNode to be inserted.
 */
-void insertNode( struct taskNode* s, struct taskNode t ) {
+void insertNode( struct taskNode* s, struct taskNode t ) 
+{
     //check to see how many tasks are in s
     int j = 0;
-    while( s[ j ].dateDue != NULL && isalpha( s[ j ].name[0] ) ){
+    while( s[ j ].dateDue != NULL && isalpha( s[ j ].name[0] ) )
         j++;
-    }
     //insert node at position after j
     s[ j ] = t;
 }
@@ -91,7 +95,8 @@ void insertNode( struct taskNode* s, struct taskNode t ) {
     @param d : description.
     @param dD : date due.
 */
-struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD ) {
+struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD ) 
+{
     struct taskNode t;
     t.priority = p;
     t.timeInMinutes = tM;
