@@ -1,6 +1,7 @@
 #include "heapsort.h"
 #include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /*
     maxHeapify function used to maintain the max-heap property.
@@ -8,26 +9,27 @@
     @param s : array of taskNode structures.
     @param i: subtree rooted at i.
 */
-void maxHeapify( struct taskNode* s, int i )
+void maxHeapify( struct taskNode** s, int i )
 {
     int largest = i;
-    int left = 2 * i;
-    int right = 2 * i + 1;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
     // if left child is largest, set as largest
-    if( left < sizeof(s) && s[ left ].priority > s[ largest ].priority ) {
+    if( ( left < sizeof(s) ) && ( s[ left ]->priority > s[ largest ]->priority ) ) 
         largest = left;
-    }
     // if right child is largest, set as largest
-    if( right < sizeof(s) && s[ right ].priority > s[ largest ].priority ) {
+    if( ( right < sizeof(s) ) && ( s[ right ]->priority > s[ largest ]->priority ) ) 
         largest = right;
-    }
     // if largest isn't i, exchange root with i and maxHeapify
-    if( largest != i ) {
-        struct taskNode temp;
-        temp = s[ i ];
-        s[ i ] = s[ largest ];
-        s[ largest ] = temp;
-        maxHeapify( s, largest );
+    if( largest != i ) 
+    {
+        printf("largest != i\n");
+        printf("s[largest] = %d\n", s[largest]->priority);
+        printf("s[i] = %d\n", s[i]->priority);
+        swap( s[ largest ], s[ i ] );
+        printf("s[largest] = %d\n", s[largest]->priority);
+        printf("s[i] = %d\n", s[i]->priority);
+        maxHeapify( s, i );
     }
 }
 
@@ -37,9 +39,8 @@ void maxHeapify( struct taskNode* s, int i )
     @param s : array of taskNode structures.
     @param n : size of heap.
 */
-void buildMaxHeap( struct taskNode* s, int n ) 
+void buildMaxHeap( struct taskNode** s, int n ) 
 {
-    n = sizeof( s );
     int last = ( n / 2 ) - 1;
     for( int i = last; i >= 0; i-- ) {
         maxHeapify( s, i );
@@ -56,53 +57,27 @@ void buildMaxHeap( struct taskNode* s, int n )
     @param s : array of taskNode structures.
     @param n : size of heap.
 */
-void heapSort( struct taskNode* s, int n ) 
+void heapSort( struct taskNode** s, int n ) 
 {
+    printf("entered heapsort.\n");
     buildMaxHeap( s, n );
-    for( int i = n / 2 - 1; i >= 0; i-- ) 
+    for( int i = n - 1; i >= 0; i-- ) 
     {
-        struct taskNode temp;
-        temp = s[ i ];
-        s[ i ] = s[ 0 ];
-        s[ 0 ] = temp;
+        swap( s[ i ], s[ 0 ] );
+        printf("done swapping.\n");
         maxHeapify( s, i );
     }
 }
 
 /*
-    insertNode function inserts a taskNode into the heap.
-    @param s : array of taskNode structures.
-    @param t : taskNode to be inserted.
+    swap funtion swaps the position of the two taskNodes.
+    @param a : taskNode to be swapped.
+    @param b : taskNode to also be swapped. WOW!
 */
-void insertNode( struct taskNode* s, struct taskNode t ) 
+void swap( struct taskNode* a, struct taskNode* b )
 {
-    //check to see how many tasks are in s
-    int j = 0;
-    while( s[ j ].dateDue != NULL && isalpha( s[ j ].name[0] ) )
-        j++;
-    //insert node at position after j
-    s[ j ] = t;
-}
-
-/*
-    buildNode function takes in variables for a taskNode object and
-    returns the built node.
-    @param s : array of taskNode structures.
-    @param p : priority.
-    @param tM : time in minutes.
-    @param tH : time in hours.
-    @param n : name.
-    @param d : description.
-    @param dD : date due.
-*/
-struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD ) 
-{
-    struct taskNode t;
-    t.priority = p;
-    t.timeInMinutes = tM;
-    t.timeInHours = tH;
-    t.name = n;
-    t.description = d;
-    t.dateDue = dD;
-    return t;
+    printf("entered swap.\n");
+    struct taskNode temp = *a;
+    *a = *b;
+    *b = temp;
 }
