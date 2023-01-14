@@ -7,8 +7,10 @@ clean:
 # C compilations
 heapsort.o: heapsort.c heapsort.h taskNode.h
 	$(CC) $(CFLAGS) -c heapsort.c 
-driver.o: main.c heapsort.h taskNode.h
+main.o: main.c heapsort.h taskNode.h
 	$(CC) $(CFLAGS) -c main.c
+taskNode.o: taskNode.c taskNode.h 
+	$(CC) $(CFLAGS) -c taskNode.c 
 # Executable programs
-main: main.o heapsort.o
-	$(CC) $(CFLAGS) -o main main.o heapsort.o
+main: main.o heapsort.o taskNode.o
+	$(CC) $(CFLAGS) -o main main.o heapsort.o taskNode.o

@@ -2,13 +2,11 @@
 #define _heapsort_h
 #include "taskNode.h"
 
-void heapSort( struct taskNode s[ ], int n );
-void maxHeapify( struct taskNode s[ ], int i );
-void buildMaxHeap( struct taskNode s[ ], int n );
+extern int count;
+extern struct taskNode* tasks;
 
-void insertNode( struct taskNode s[ ], struct taskNode t );
-struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD );
-//void deleteNode( struct taskNode s[ ], struct taskNode t );
-//void updateNode( struct taskNode s[ ], struct taskNode t );
+void heapSort( );
+void maxHeapify( int i );
+void buildMaxHeap( );
 
 #endif
