@@ -7,6 +7,9 @@
 #include "heapsort.h"
 #include "taskNode.h"
 
+int count = 0;
+struct taskNode* tasks;
+
 int main( ) 
 {
 
@@ -22,7 +25,7 @@ int main( )
 
     //check to see how many tasks
     char line[1000];
-    int count = 0;
+    fgets( line, 1000, f );
     while(fgets( line, 1000, f ) != NULL )
     {
         count++;
@@ -30,7 +33,7 @@ int main( )
     }
 
     //else begin program
-    printf("Welcome to TaskMachine3000Turbo!\n");
+    printf("\nWelcome to TaskMachine3000Turbo!\n");
     printf("________________________________\n\n");
     printf("What would you like to do?\n");
     printf("1 - view tasks.\n");
@@ -42,43 +45,39 @@ int main( )
 
     //need to find out how many tasks are in tasknode with input from csv
     //and replace "10" with the #
-    struct taskNode* tasks = ( struct taskNode* )malloc( 10 * sizeof( struct taskNode ) );
-    printf("allocated memory for tasks array.\n");
+   
+   
+    tasks = ( struct taskNode* )malloc( 100 * sizeof( struct taskNode ) );
+    
     struct taskNode t1 = buildNode( 1, 12, 12, "i", "x", "k" );
-    //printf("built node.\n");
-    insertNode( &tasks, &t1 );
-    //printf("inserted Node.\n");
-
+    insertNode( t1 );
     struct taskNode t2 = buildNode( 2, 12, 12, "i", "x", "k" );
-    insertNode( &tasks, &t2 );
-
+    insertNode( t2 );
     struct taskNode t3 = buildNode( 3, 12, 12, "i", "x", "k" );
-    insertNode( &tasks, &t3 );
-
+    insertNode( t3 );
     struct taskNode t4 = buildNode( 4, 12, 12, "i", "x", "k" );
-    insertNode( &tasks, &t4 ); 
-
+    insertNode( t4 ); 
     struct taskNode t5 = buildNode( 2, 12, 12, "i", "x", "k" );
-    insertNode( &tasks, &t5 );
-
+    insertNode( t5 );
     struct taskNode t6 = buildNode( 5, 12, 12, "i", "x", "k" );
-    insertNode( &tasks, &t6 );
-
+    insertNode( t6 );
     struct taskNode t7 = buildNode( 7, 12, 12, "i", "x", "k" );
-    insertNode( &tasks, &t7 );
-
+    insertNode( t7 );
     struct taskNode t8 = buildNode( 9, 12, 12, "i", "x", "k" );
-    insertNode( &tasks, &t8 );
+    insertNode( t8 );
+    struct taskNode t9 = buildNode( 1, 12, 12, "i", "x", "k" );
+    insertNode( t9 );
+    struct taskNode t10 = buildNode( 25, 12, 12, "i", "x", "k" );
+    insertNode( t10 );
 
-    printNodes( &tasks );
-    printf("printNodes complete.\n");
-    heapSort( &tasks, sizeof(tasks) );
-    printf("heapsort complete.\n");
-    printNodes( &tasks );
+    printNodes( );
+    heapSort( );
+    printNodes( );
 
     //free memeory
-    freeNodes( &tasks );
-    free( &tasks );
+    //freeNodes( &tasks );
+    free( tasks );
+    tasks = NULL;
     fclose( f );
     return 0;
 }

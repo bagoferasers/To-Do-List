@@ -2,20 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 
 /*
     printNodes function prints out the different taskNodes.
     @param tasks : taskNode* that stores all the taskNode
     structures.
 */
-void printNodes( struct taskNode** s )
+void printNodes( )
 {
-    printf( "LIST OF TASKS" );
+    printf( "\nLIST OF TASKS\n" );
     printf("________________________________\n\n");
     int j = 0;
-    while( s[ j ] != NULL )
+    while( j < count )
     {
-        printf("%d - %s ( priority %d ) is due %s\n", j, s[ j ]->name, s[ j ]->priority, s[ j ]->dateDue );
+        printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
         j++;
     }
         
@@ -25,18 +26,9 @@ void printNodes( struct taskNode** s )
     @param s : array of taskNode structures.
     @param t : taskNode to be inserted.
 */
-void insertNode( struct taskNode** s, struct taskNode* t ) 
+void insertNode( struct taskNode t ) 
 {
-    printf("entered insertNode.\n");
-    int size = 0;
-    while( size < sizeof(s) )
-    {
-        printf("entered while loop.\n");
-        size++;
-    }
-    printf("size = %d\n", size);
-    *s[ size ] = *t;
-    printf("s[size]->priority = %d\n", s[size]->priority);
+    tasks[ count++ ] = t;
 }
 
 /*
@@ -63,16 +55,13 @@ struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD )
 }
 
 /*
-    freeNodes function frees the taskNodes within the array.
-    @param s : array of taskNode structures.
+    swap funtion swaps the position of the two taskNodes.
+    @param a : taskNode to be swapped.
+    @param b : taskNode to also be swapped. WOW!
 */
-void freeNodes( struct taskNode** s ) 
+void swap( struct taskNode* a, struct taskNode* b )
 {
-    int size = sizeof(s);
-    printf("entered freeNodes.\n");
-    for(int i = 0; i < size; i++ )
-    {
-        free( &s[ i ] );
-        printf("freed taskNode\n");
-    }
+    struct taskNode temp = *a;
+    *a = *b;
+    *b = temp;
 }
