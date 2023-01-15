@@ -1,25 +1,20 @@
 #include "taskNode.h"
+#include "heapsort.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 
 /*
-    printNodes function prints out the different taskNodes.
-    @param tasks : taskNode* that stores all the taskNode
-    structures.
+    printNodes function prints out the different taskNodes through recursion.
+    @param j : starting 
 */
-void printNodes( )
+void printNodes( j )
 {
-    printf( "\nLIST OF TASKS\n" );
-    printf("________________________________\n\n");
-    int j = 0;
-    while( j < count )
-    {
-        printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
-        j++;
-    }
-        
+    if( j >= count )
+        return;
+    printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
+    printNodes( ++j );
 }
 /*
     insertNode function inserts a taskNode into the heap.
@@ -29,6 +24,7 @@ void printNodes( )
 void insertNode( struct taskNode t ) 
 {
     tasks[ count++ ] = t;
+    heapSort( );
 }
 
 /*

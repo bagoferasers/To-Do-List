@@ -18,7 +18,7 @@ void insertNode( struct taskNode t );
 
 struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD );
 
-void printNodes( );
+void printNodes( int j );
 
 void swap( struct taskNode* a, struct taskNode* b );
 

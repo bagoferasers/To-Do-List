@@ -3,9 +3,11 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-#include <time.h>
+//#include <stdbool.h>
+//#include <time.h>
 #include "heapsort.h"
 #include "taskNode.h"
+#include "selection.h"
 
 int count = 0;
 struct taskNode* tasks;
@@ -32,50 +34,61 @@ int main( )
         printf("line %d - %s\n", count, line );
     }
 
-    //else begin program
-    printf("\nWelcome to TaskMachine3000Turbo!\n");
-    printf("________________________________\n\n");
-    printf("What would you like to do?\n");
-    printf("1 - view tasks.\n");
-    printf("2 - add task.\n\n");
-    
-    int selection = -1;
-    scanf("%d", &selection);
-    printf("\n\nselection = %d\n\n", selection);
-
     //need to find out how many tasks are in tasknode with input from csv
     //and replace "10" with the #
-   
-   
     tasks = ( struct taskNode* )malloc( 100 * sizeof( struct taskNode ) );
-    
-    struct taskNode t1 = buildNode( 1, 12, 12, "i", "x", "k" );
+
+    //else begin program while loop
+    int selection = -1;
+
+    struct taskNode t1 = buildNode( 1, 12, 12, "Laundry", "This is the description me thinks", "01/25/2023" );
     insertNode( t1 );
-    struct taskNode t2 = buildNode( 2, 12, 12, "i", "x", "k" );
-    insertNode( t2 );
-    struct taskNode t3 = buildNode( 3, 12, 12, "i", "x", "k" );
-    insertNode( t3 );
-    struct taskNode t4 = buildNode( 4, 12, 12, "i", "x", "k" );
-    insertNode( t4 ); 
-    struct taskNode t5 = buildNode( 2, 12, 12, "i", "x", "k" );
-    insertNode( t5 );
-    struct taskNode t6 = buildNode( 5, 12, 12, "i", "x", "k" );
-    insertNode( t6 );
-    struct taskNode t7 = buildNode( 7, 12, 12, "i", "x", "k" );
-    insertNode( t7 );
-    struct taskNode t8 = buildNode( 9, 12, 12, "i", "x", "k" );
-    insertNode( t8 );
-    struct taskNode t9 = buildNode( 1, 12, 12, "i", "x", "k" );
-    insertNode( t9 );
-    struct taskNode t10 = buildNode( 25, 12, 12, "i", "x", "k" );
-    insertNode( t10 );
 
-    printNodes( );
-    heapSort( );
-    printNodes( );
+    while( selection != 0 ) 
+    {
+        printf("________________________________\n");
+        printf("--------------------------------\n");
+        printf("Welcome to TaskMachine3000Turbo!\n");
+        printf("--------------------------------\n");
+        printf("1 - All tasks.\n");
+        printf("2 - High priority.\n");
+        printf("3 - Medium priority.\n");
+        printf("4 - Low priority.\n");
+        printf("5 - Add task.\n");
+        printf("0 - Exit TaskMachine3000Turbo.\n");
 
-    //free memeory
-    //freeNodes( &tasks );
+        scanf(" %d", &selection);
+
+        switch(selection) 
+        {
+            case 1:
+                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+                showAllTasks( );
+                break;
+            case 2:
+                printf("you selected 2\n");
+                break;
+            case 3:
+                printf("you selected 3\n");
+                break;
+            case 4:
+                printf("you selected 4\n");
+                break;
+            case 5:
+                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+                addTask( );
+                break;
+            case 6:
+                printf("you selected 6\n");
+                break;
+            case 0:
+                printf("________________________________\n");
+                printf("--------------------------------\n");
+                printf("        <3 Goodbye! <3\n");
+                printf("--------------------------------\n");
+        }
+    }
+    //free memory in task objects
     free( tasks );
     tasks = NULL;
     fclose( f );
