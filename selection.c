@@ -35,10 +35,10 @@ void selectTask( )
     printf("Which task would you like to see?\n");
     int selectedTask = -1;
     scanf("%d", &selectedTask);
+    printf("selected Task = %d\n", selectedTask);
     printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
-    printf("%s ( priority %d ) is due %s%s\n %dh %dm\n\n", tasks[selectedTask].name, tasks[selectedTask].priority, 
+    printf("%s ( priority %d ) is due %s\n%s\n %dh %dm\n\n", tasks[selectedTask].name, tasks[selectedTask].priority, 
             tasks[selectedTask].dateDue, tasks[selectedTask].description, tasks[selectedTask].timeInHours, tasks[selectedTask].timeInMinutes );
-
     int selection = -1;
     printf("1 - Complete task.\n");
     printf("0 - Go back.\n");
@@ -47,8 +47,8 @@ void selectTask( )
     {
         case 1:
             printf("\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n");
+            printf("selected task for case 1 = %d\n", selectedTask);
             deleteNode( selectedTask );
-            break;
         case 0:
             printf("\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n");
             printNodes( 0 );

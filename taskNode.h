@@ -1,5 +1,6 @@
 #ifndef _taskNode_h
 #define _taskNode_h
+#include "stdio.h"
 
 extern int count;
 extern struct taskNode* tasks;
@@ -20,13 +21,13 @@ struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD );
 
 void printNodes( int j );
 
-void swap( struct taskNode* a, struct taskNode* b );
-
-void freeTaskObjects( int j );
+void swap( int a, int b );
 
 void deleteNode( int j );
 
 void addTask( );
+
+void writeToFile( FILE* fW, int j );
 
 //void updateNode( struct taskNode s[ ], struct taskNode t );
 

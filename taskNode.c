@@ -1,8 +1,8 @@
 #include "taskNode.h"
 #include "heapsort.h"
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
 
 /*
@@ -16,6 +16,7 @@ void printNodes( j )
     printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
     printNodes( ++j );
 }
+
 /*
     insertNode function inserts a taskNode into the heap.
     @param s : array of taskNode structures.
@@ -24,9 +25,9 @@ void printNodes( j )
 void insertNode( struct taskNode t ) 
 {
     tasks[ count++ ] = t;
-    printf("%s\n", tasks[count-1].dateDue);
-    if( count > 1 )
+    //if( count > 1 )
         heapSort( );
+    printNodes( 0 );
 }
 
 /*
@@ -57,38 +58,20 @@ struct taskNode buildNode( int p, int tM, int tH, char* n, char* d, char* dD )
     @param a : taskNode to be swapped.
     @param b : taskNode to also be swapped. WOW!
 */
-void swap( struct taskNode* a, struct taskNode* b )
+void swap( int a, int b )
 {
-    struct taskNode temp = *a;
-    *a = *b;
-    *b = temp;
+    struct taskNode t = tasks[a];
+    tasks[a] = tasks[b];
+    tasks[b] = t;
 }
 
 /*
-    freeTaskObjects function recursively frees the memory allocated for 
-    dateDue, description, and name within a taskNode.
-    @param j : The starting index.
+    deleteNode function deletes a taskNode from list of tasks.
+    @param j : index of taskNode to be deleted.
 */
-void freeTaskObjects( int j )
-{
-    printf("freeing objects\n");
-    printf("j = %d\n", j);
-    printf("count = %d\n", count);
-    if( j != count-1 )////////////////////// just count?????
-        return;
-    freeTaskObjects( j+1 );
-    printf("freeing object\n");
-    free(tasks[j].dateDue);
-    free(tasks[j].description);
-    free(tasks[j].name);
-}
-
 void deleteNode( int j )
 {
-    free(tasks[j].dateDue);
-    free(tasks[j].description);
-    free(tasks[j].name);
-    while( j < count-1)//////////// just count????
+    while( j < count)
     {
         tasks[j] = tasks[j+1];
         j++;
@@ -96,6 +79,10 @@ void deleteNode( int j )
     count--;
 }
 
+/*
+    addTask function asks the user to input values into taskNode struct and 
+    adding that struct to the list of tasks.
+*/
 void addTask( )
 {
     printf("\nEnter name : ");
@@ -124,5 +111,13 @@ void addTask( )
 
     struct taskNode taskToAdd = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue );
     insertNode( taskToAdd );
-    count++;
 }
+
+void writeToFile( FILE* fW, int j )
+{
+    if( j >= count )
+        return;
+    fprintf(fW, "\n%d,%d,%d,%s,%s,%s", tasks[j].priority, tasks[j].timeInMinutes, tasks[j].timeInHours, tasks[j].name, tasks[j].description, tasks[j].dateDue);
+    j++;
+    writeToFile( fW, j );
+    }

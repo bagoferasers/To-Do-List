@@ -8,11 +8,10 @@
 #include "selection.h"
 
 int count = 0;
-struct taskNode* tasks;
+struct taskNode* tasks = NULL;
 
 int main( ) 
 {
-
     tasks = ( struct taskNode* )malloc( 100 * sizeof( struct taskNode ) );
     // find file path and open file
     FILE* f = fopen( "data.csv", "r" );
@@ -26,25 +25,21 @@ int main( )
 
     //check to see how many tasks
     char* buffer = ( char* )malloc( sizeof( char ) );
-    int priority;
-    int timeInMinutes;
-    int timeInHours;
-    char* name = (char*)malloc(sizeof(char));
-    char* description = (char*)malloc(sizeof(char));
-    char* dateDue = (char*)malloc(sizeof(char));
     fgets( buffer, 1000, f );
-    while( !feof(f) && fgets( buffer, 1000, f ) != NULL )
+    while( !feof(f) && fgets( buffer, 1000, f ) != NULL && strcmp(buffer,"\n") != 0 )
     {
-        priority = atoi( strtok( buffer, ","));
-        timeInMinutes = atoi(strtok(NULL,","));
-        timeInHours = atoi(strtok(NULL, ","));
-        name = strtok( NULL, "," );
-        description = strtok( NULL, "," );
-        dateDue = strtok( NULL, "," );
+        int priority = atoi( strtok( buffer, ","));
+        int timeInMinutes = atoi(strtok(NULL,","));
+        int timeInHours = atoi(strtok(NULL, ","));
+        char* name = strtok( NULL, "," );
+        char* description = strtok( NULL, "," );
+        char* dateDue = strtok( NULL, ";" );
         struct taskNode t = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue);
         insertNode( t );
     }
+    printf("\n");
     fclose( f );
+    //printNodes( 0 );
     //begin program while loop
     int selection = -1;
 
@@ -94,11 +89,14 @@ int main( )
                 printf("--------------------------------\n");
         }
     }
-    //write remaining nodes to file
+    //write to file
+    FILE* fW = fopen("data.csv", "w");
+    fprintf(fW, "priority,timeInMinutes,timeInHours,name,description,dateDue");
+    writeToFile( fW, 0 );
+    fclose(fW);
 
     //free memory in task objects
     free(buffer);
-    freeTaskObjects(0);
     free( tasks );
     tasks = NULL;
 

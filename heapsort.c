@@ -23,7 +23,7 @@ void maxHeapify( int i )
     // if largest isn't i, exchange root with i and maxHeapify
     if( largest != i ) 
     {
-        swap( &tasks[ largest ], &tasks[ i ] );
+        swap( largest, i );
         maxHeapify( largest );
     }
 }
@@ -53,7 +53,7 @@ void heapSort( )
     buildMaxHeap( );
     for( int i = count - 1; i >= 0; i-- ) 
     {
-        swap( &tasks[ i ], &tasks[ 0 ] );
+        swap( i, 0 );
         maxHeapify( i );
     }
 }
