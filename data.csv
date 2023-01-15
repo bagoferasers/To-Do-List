@@ -1,1 +1,2 @@
-﻿priority,timeInMinutes,timeInHours,name,description,dateDue
+priority,timeInMinutes,timeInHours,name,description,dateDue
+1, 10, 0, Task 1, Do the dishes!, 01012001

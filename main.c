@@ -3,8 +3,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-//#include <stdbool.h>
-//#include <time.h>
 #include "heapsort.h"
 #include "taskNode.h"
 #include "selection.h"
@@ -15,6 +13,7 @@ struct taskNode* tasks;
 int main( ) 
 {
 
+    tasks = ( struct taskNode* )malloc( 100 * sizeof( struct taskNode ) );
     // find file path and open file
     FILE* f = fopen( "data.csv", "r+" );
 
@@ -26,22 +25,24 @@ int main( )
     }
 
     //check to see how many tasks
-    char* line = (char*)malloc(sizeof(char));
-    fgets( line, 1000, f );
-    while(fgets( line, 1000, f ) != NULL )
+    char* buffer = ( char* )malloc( sizeof( char ) );
+    char* token = ( char* )malloc( sizeof( char ) );
+    fgets( buffer, 1000, f );
+    while( !feof(f) && fgets( buffer, 1000, f ) != NULL )
     {
         count++;
-        printf("line %d - %s\n", count, line );
-        //parse line
-        //build a taskNode
-        //insert taskNode
+        struct taskNode t = buildNode( 
+                                        atoi( strtok( buffer, "," ) ), 
+                                        atoi( strtok( NULL, "," ) ), 
+                                        atoi( strtok( NULL, "," ) ), 
+                                        strtok( NULL, "," ), 
+                                        strtok( NULL, "," ), 
+                                        strtok( NULL, "," ) 
+                                     );
+        insertNode( t );
     }
 
-    //need to find out how many tasks are in tasknode with input from csv
-    //and replace "10" with the #
-    tasks = ( struct taskNode* )malloc( 100 * sizeof( struct taskNode ) );
-
-    //else begin program while loop
+    //begin program while loop
     int selection = -1;
 
     while( selection != 0 ) 
@@ -64,7 +65,7 @@ int main( )
         switch(selection) 
         {
             case 1:
-                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
                 showAllTasks( );
                 break;
             case 2:
@@ -91,10 +92,13 @@ int main( )
         }
     }
     //free memory in task objects
-    free(line);
+    free(buffer);
+    free(token);
     freeTaskObjects(0);
     free( tasks );
     tasks = NULL;
+
+    //close file and end TaskMachine3000Turbo :(
     fclose( f );
     return 0;
 }

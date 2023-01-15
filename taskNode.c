@@ -11,7 +11,7 @@
 */
 void printNodes( j )
 {
-    if( j >= count )
+    if( j >= count-1 )
         return;
     printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
     printNodes( ++j );
@@ -63,7 +63,7 @@ void swap( struct taskNode* a, struct taskNode* b )
 }
 
 /*
-    
+
 */
 void freeTaskObjects( int j )
 {

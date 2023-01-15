@@ -100,4 +100,11 @@ void addTask( )
 
     struct taskNode taskToAdd = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue );
     insertNode( taskToAdd );
+    FILE* f = fopen("data.csv", "r+");
+    char* buffer = ( char* )malloc( sizeof( char ) );
+    fgets( buffer, 1000, f );
+    fprintf(f,"%d, %d, %d, %s, %s, %s\n", taskToAdd.priority, taskToAdd.timeInMinutes, taskToAdd.timeInHours,
+        taskToAdd.name, taskToAdd.description, taskToAdd.dateDue);
+    fclose(f);
+    free(buffer);
 }
