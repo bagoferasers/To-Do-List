@@ -33,8 +33,8 @@ int main( )
         count++;
         printf("line %d - %s\n", count, line );
         //parse line
-        //create a taskNode
-        //add taskNode
+        //build a taskNode
+        //insert taskNode
     }
 
     //need to find out how many tasks are in tasknode with input from csv
@@ -56,13 +56,15 @@ int main( )
         printf("4 - Low priority.\n");
         printf("5 - Add task.\n");
         printf("0 - Exit TaskMachine3000Turbo.\n");
+        printf("--------------------------------\n");
+        printf("Select number : ");
 
-        scanf(" %d", &selection);
+        scanf("%d", &selection);
 
         switch(selection) 
         {
             case 1:
-                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 showAllTasks( );
                 break;
             case 2:
@@ -75,7 +77,7 @@ int main( )
                 printf("you selected 4\n");
                 break;
             case 5:
-                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+                printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 addTask( );
                 break;
             case 6:
