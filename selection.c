@@ -7,7 +7,6 @@ void showAllTasks( )
 {
     //show all tasks
     printNodes( 0 );
-    printf("\n");
     //while selection
     int selection = -1;
     while( selection != 0 ) 
@@ -35,9 +34,9 @@ void selectTask( )
     printf("Which task would you like to see?\n");
     int selectedTask = -1;
     scanf("%d", &selectedTask);
-    printf("\n%s ( priority %d ) is due %s\n", tasks[selectedTask].name, tasks[selectedTask].priority, tasks[selectedTask].dateDue);
-    printf("%s\n", tasks[selectedTask].description);
-    printf("%d h %d m\n\n", tasks[selectedTask].timeInHours, tasks[selectedTask].timeInMinutes);
+    printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
+    printf("%s ( priority %d ) is due %s%s\n %dh %dm\n\n", tasks[selectedTask].name, tasks[selectedTask].priority, 
+            tasks[selectedTask].dateDue, tasks[selectedTask].description, tasks[selectedTask].timeInHours, tasks[selectedTask].timeInMinutes );
 
     int selection = -1;
     while(selection != 0)

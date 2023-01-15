@@ -6,8 +6,8 @@
 #include <string.h>
 
 /*
-    printNodes function prints out the different taskNodes through recursion.
-    @param j : starting 
+    printNodes function recursively prints out the different taskNodes.
+    @param j : The starting index.
 */
 void printNodes( j )
 {
@@ -63,7 +63,9 @@ void swap( struct taskNode* a, struct taskNode* b )
 }
 
 /*
-
+    freeTaskObjects function recursively frees the memory allocated for 
+    dateDue, description, and name within a taskNode.
+    @param j : The starting index.
 */
 void freeTaskObjects( int j )
 {
