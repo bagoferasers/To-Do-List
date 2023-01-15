@@ -11,7 +11,7 @@
 */
 void printNodes( j )
 {
-    if( j >= count-1 )
+    if( j >= count )
         return;
     printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
     printNodes( ++j );
@@ -24,7 +24,9 @@ void printNodes( j )
 void insertNode( struct taskNode t ) 
 {
     tasks[ count++ ] = t;
-    heapSort( );
+    printf("%s\n", tasks[count-1].dateDue);
+    if( count > 1 )
+        heapSort( );
 }
 
 /*
@@ -69,10 +71,58 @@ void swap( struct taskNode* a, struct taskNode* b )
 */
 void freeTaskObjects( int j )
 {
-    if( j >= count )
+    printf("freeing objects\n");
+    printf("j = %d\n", j);
+    printf("count = %d\n", count);
+    if( j != count-1 )////////////////////// just count?????
         return;
-    freeTaskObjects( ++j );
+    freeTaskObjects( j+1 );
+    printf("freeing object\n");
     free(tasks[j].dateDue);
     free(tasks[j].description);
     free(tasks[j].name);
+}
+
+void deleteNode( int j )
+{
+    free(tasks[j].dateDue);
+    free(tasks[j].description);
+    free(tasks[j].name);
+    while( j < count-1)//////////// just count????
+    {
+        tasks[j] = tasks[j+1];
+        j++;
+    }
+    count--;
+}
+
+void addTask( )
+{
+    printf("\nEnter name : ");
+    char* name = (char*)malloc(sizeof(char));
+    scanf(" %[^\n]%*c", name);
+
+    printf("Enter date due ( DDMMYYYY ) : ");
+    char* dateDue = (char*)malloc(sizeof(char));
+    scanf(" %[^\n]%*c", dateDue);
+
+    printf("Enter priority : ");
+    int priority;
+    scanf( " %d", &priority );
+
+    printf("Enter time in hours : ");
+    int timeInHours;
+    scanf(" %d", &timeInHours);
+
+    printf("Enter time in minutes : ");
+    int timeInMinutes;
+    scanf(" %d", &timeInMinutes);
+
+    printf("Enter description : ");
+    char* description = (char*)malloc(sizeof(char));
+    scanf(" %[^\n]%*c", description);
+
+    struct taskNode taskToAdd = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue );
+    insertNode( taskToAdd );
+    count++;
 }

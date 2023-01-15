@@ -7,6 +7,7 @@ void showAllTasks( )
 {
     //show all tasks
     printNodes( 0 );
+    printf("\n");
     //while selection
     int selection = -1;
     while( selection != 0 ) 
@@ -39,71 +40,18 @@ void selectTask( )
             tasks[selectedTask].dateDue, tasks[selectedTask].description, tasks[selectedTask].timeInHours, tasks[selectedTask].timeInMinutes );
 
     int selection = -1;
-    while(selection != 0)
+    printf("1 - Complete task.\n");
+    printf("0 - Go back.\n");
+    scanf( "%d", &selection );
+    switch( selection ) 
     {
-        printf("1 - Complete task.\n");
-        printf("0 - Go back.\n");
-
-        scanf( "%d", &selection );
-
-        switch( selection ) 
-        {
-            case 1:
-                completeTask( selectedTask );
-                break;
-            case 0:
-                printf("\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n");
-                printNodes( 0 );
-                printf("\n");
-        }
-    }
-}
-
-int i = 0;
-void completeTask( int selectedTask ) 
-{
-    while( i < count )
-    {
-        if( i == selectedTask )
+        case 1:
+            printf("\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n");
+            deleteNode( selectedTask );
             break;
-        i++;
+        case 0:
+            printf("\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n");
+            printNodes( 0 );
+            printf("\n");
     }
-    printf("i == selected task\n%d == %d\n", i, selectedTask);
-}
-
-void addTask( )
-{
-    printf("\nEnter name : ");
-    char* name = (char*)malloc(sizeof(char));
-    scanf(" %[^\n]%*c", name);
-
-    printf("Enter date due ( DDMMYYYY ) : ");
-    char* dateDue = (char*)malloc(sizeof(char));
-    scanf(" %[^\n]%*c", dateDue);
-
-    printf("Enter priority : ");
-    int priority;
-    scanf( " %d", &priority );
-
-    printf("Enter time in hours : ");
-    int timeInHours;
-    scanf(" %d", &timeInHours);
-
-    printf("Enter time in minutes : ");
-    int timeInMinutes;
-    scanf(" %d", &timeInMinutes);
-
-    printf("Enter description : ");
-    char* description = (char*)malloc(sizeof(char));
-    scanf(" %[^\n]%*c", description);
-
-    struct taskNode taskToAdd = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue );
-    insertNode( taskToAdd );
-    FILE* f = fopen("data.csv", "r+");
-    char* buffer = ( char* )malloc( sizeof( char ) );
-    fgets( buffer, 1000, f );
-    fprintf(f,"%d, %d, %d, %s, %s, %s\n", taskToAdd.priority, taskToAdd.timeInMinutes, taskToAdd.timeInHours,
-        taskToAdd.name, taskToAdd.description, taskToAdd.dateDue);
-    fclose(f);
-    free(buffer);
 }

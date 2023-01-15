@@ -10,6 +10,4 @@ void selectTask( );
 
 void completeTask( int selection );
 
-void addTask( );
-
 #endif

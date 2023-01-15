@@ -24,7 +24,9 @@ void swap( struct taskNode* a, struct taskNode* b );
 
 void freeTaskObjects( int j );
 
-//void deleteNode( struct taskNode s[ ], struct taskNode t );
+void deleteNode( int j );
+
+void addTask( );
 
 //void updateNode( struct taskNode s[ ], struct taskNode t );
 

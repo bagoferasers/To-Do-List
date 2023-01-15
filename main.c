@@ -15,7 +15,7 @@ int main( )
 
     tasks = ( struct taskNode* )malloc( 100 * sizeof( struct taskNode ) );
     // find file path and open file
-    FILE* f = fopen( "data.csv", "r+" );
+    FILE* f = fopen( "data.csv", "r" );
 
     // if can't find file, output and return
     if( f == NULL ) 
@@ -26,22 +26,25 @@ int main( )
 
     //check to see how many tasks
     char* buffer = ( char* )malloc( sizeof( char ) );
-    char* token = ( char* )malloc( sizeof( char ) );
+    int priority;
+    int timeInMinutes;
+    int timeInHours;
+    char* name = (char*)malloc(sizeof(char));
+    char* description = (char*)malloc(sizeof(char));
+    char* dateDue = (char*)malloc(sizeof(char));
     fgets( buffer, 1000, f );
     while( !feof(f) && fgets( buffer, 1000, f ) != NULL )
     {
-        count++;
-        struct taskNode t = buildNode( 
-                                        atoi( strtok( buffer, "," ) ), 
-                                        atoi( strtok( NULL, "," ) ), 
-                                        atoi( strtok( NULL, "," ) ), 
-                                        strtok( NULL, "," ), 
-                                        strtok( NULL, "," ), 
-                                        strtok( NULL, "," ) 
-                                     );
+        priority = atoi( strtok( buffer, ","));
+        timeInMinutes = atoi(strtok(NULL,","));
+        timeInHours = atoi(strtok(NULL, ","));
+        name = strtok( NULL, "," );
+        description = strtok( NULL, "," );
+        dateDue = strtok( NULL, "," );
+        struct taskNode t = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue);
         insertNode( t );
     }
-
+    fclose( f );
     //begin program while loop
     int selection = -1;
 
@@ -91,14 +94,14 @@ int main( )
                 printf("--------------------------------\n");
         }
     }
+    //write remaining nodes to file
+
     //free memory in task objects
     free(buffer);
-    free(token);
     freeTaskObjects(0);
     free( tasks );
     tasks = NULL;
 
-    //close file and end TaskMachine3000Turbo :(
-    fclose( f );
+    //end TaskMachine3000Turbo :(
     return 0;
 }
