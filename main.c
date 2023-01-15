@@ -26,12 +26,15 @@ int main( )
     }
 
     //check to see how many tasks
-    char line[1000];
+    char* line = (char*)malloc(sizeof(char));
     fgets( line, 1000, f );
     while(fgets( line, 1000, f ) != NULL )
     {
         count++;
         printf("line %d - %s\n", count, line );
+        //parse line
+        //create a taskNode
+        //add taskNode
     }
 
     //need to find out how many tasks are in tasknode with input from csv
@@ -40,9 +43,6 @@ int main( )
 
     //else begin program while loop
     int selection = -1;
-
-    struct taskNode t1 = buildNode( 1, 12, 12, "Laundry", "This is the description me thinks", "01/25/2023" );
-    insertNode( t1 );
 
     while( selection != 0 ) 
     {
@@ -89,6 +89,8 @@ int main( )
         }
     }
     //free memory in task objects
+    free(line);
+    freeTaskObjects(0);
     free( tasks );
     tasks = NULL;
     fclose( f );

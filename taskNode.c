@@ -61,3 +61,16 @@ void swap( struct taskNode* a, struct taskNode* b )
     *a = *b;
     *b = temp;
 }
+
+/*
+    
+*/
+void freeTaskObjects( int j )
+{
+    if( j >= count )
+        return;
+    freeTaskObjects( ++j );
+    free(tasks[j].dateDue);
+    free(tasks[j].description);
+    free(tasks[j].name);
+}
