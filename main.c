@@ -30,8 +30,13 @@ int main( )
     while( !feof(f) && fgets( buffer, 1000, f ) != NULL )
     {
         tokens = strdup(buffer);
-        insertNode( buildNode( atoi(strtok(tokens, ",")), atoi(strtok(tokens, ",")), atoi(strtok(tokens, ",")), 
-                            strtok(tokens, ","), strtok(tokens, ","), strtok(tokens, ",") ) );
+        int priority = atoi(strtok(tokens, ","));
+        int timeInMinutes = atoi(strtok(tokens, ","));
+        int timeInHours = atoi(strtok(tokens, ","));
+        char* name = strtok(tokens, ",");
+        char* description = strtok(tokens, ",");
+        char* dateDue = strtok(tokens, ",");
+        insertNode( buildNode(priority,timeInMinutes, timeInHours, name, description, dateDue));
     }
     printNodes( );
     fclose( f );
