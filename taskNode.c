@@ -11,8 +11,6 @@
 */
 void printNodes( )
 {
-    printf("entered printnodes.\n");
-    //printf("count == %d\n", count);
     int j = 0;
     while( j < count ) 
     {
@@ -28,12 +26,9 @@ void printNodes( )
 */
 void insertNode( struct taskNode t ) 
 {
-    //printf("count == %d\n", count);
     tasks[ count++ ] = t;
-    //printf("count == %d\n", count);
     if( count > 1 )
         heapSort( );
-    //printf("count == %d\n", count);
 }
 
 /*
@@ -115,8 +110,7 @@ void addTask( )
     char* description = (char*)malloc(sizeof(char));
     scanf(" %[^\n]%*c", description);
 
-    struct taskNode taskToAdd = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue );
-    insertNode( taskToAdd );
+    insertNode( buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue ) );
 }
 
 void writeToFile( FILE* fW, int j )
@@ -126,4 +120,4 @@ void writeToFile( FILE* fW, int j )
     fprintf(fW, "\n%d,%d,%d,%s,%s,%s", tasks[j].priority, tasks[j].timeInMinutes, tasks[j].timeInHours, tasks[j].name, tasks[j].description, tasks[j].dateDue);
     j++;
     writeToFile( fW, j );
-    }
+}

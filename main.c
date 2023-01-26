@@ -25,29 +25,16 @@ int main( )
 
     //check to see how many tasks
     char* buffer = ( char* )malloc( sizeof( char ) );
+    char* tokens = strdup(buffer);
     fgets( buffer, 1000, f );
-    printf("buffer = %s\n", buffer);
-    while( !feof(f) )
+    while( !feof(f) && fgets( buffer, 1000, f ) != NULL )
     {
-        fgets( buffer, 1000, f );
-        printf("buffer = %s\n", buffer);
-        char* tokens = strtok(buffer, ",");
-        int i = 0;
-        while(i++ < 6)
-        {
-            printf("tokens = %s\n", tokens);
-            tokens = strtok(buffer, ",");
-        }
-        //struct taskNode t = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue );
-        //insertNode( t );
-        //printf("priority = %d\ntimeInMinutes = %d\ntimeinHours = %d\n, name = %s\n, description = %s\n, dateDue = %s\n",
-                //t.priority, t.timeInMinutes, t.timeInHours, t.name, t.description, t.dateDue );
-                //printNodes();
+        tokens = strdup(buffer);
+        insertNode( buildNode( atoi(strtok(tokens, ",")), atoi(strtok(tokens, ",")), atoi(strtok(tokens, ",")), 
+                            strtok(tokens, ","), strtok(tokens, ","), strtok(tokens, ",") ) );
     }
-    printf("\n");
-    //printNodes( );
+    printNodes( );
     fclose( f );
-    //printf("count == %d\n", count);
     
     //begin program while loop
     int selection = -1;
