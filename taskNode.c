@@ -9,12 +9,16 @@
     printNodes function recursively prints out the different taskNodes.
     @param j : The starting index.
 */
-void printNodes( j )
+void printNodes( )
 {
-    if( j >= count )
-        return;
-    printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
-    printNodes( ++j );
+    printf("entered printnodes.\n");
+    //printf("count == %d\n", count);
+    int j = 0;
+    while( j < count ) 
+    {
+        printf("%d - %s ( priority %d ) is due %s\n", j, tasks[ j ].name, tasks[ j ].priority, tasks[ j ].dateDue );
+        j++;
+    }    
 }
 
 /*
@@ -24,10 +28,12 @@ void printNodes( j )
 */
 void insertNode( struct taskNode t ) 
 {
+    //printf("count == %d\n", count);
     tasks[ count++ ] = t;
-    //if( count > 1 )
+    //printf("count == %d\n", count);
+    if( count > 1 )
         heapSort( );
-    printNodes( 0 );
+    //printf("count == %d\n", count);
 }
 
 /*

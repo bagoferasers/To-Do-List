@@ -6,7 +6,7 @@
 void showAllTasks( ) 
 {
     //show all tasks
-    printNodes( 0 );
+    printNodes( );
     printf("\n");
     //while selection
     int selection = -1;

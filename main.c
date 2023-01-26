@@ -12,7 +12,7 @@ struct taskNode* tasks = NULL;
 
 int main( ) 
 {
-    tasks = ( struct taskNode* )malloc( 100 * sizeof( struct taskNode ) );
+    tasks = ( struct taskNode* )malloc(100 * sizeof( struct taskNode ) );
     // find file path and open file
     FILE* f = fopen( "data.csv", "r" );
 
@@ -26,20 +26,29 @@ int main( )
     //check to see how many tasks
     char* buffer = ( char* )malloc( sizeof( char ) );
     fgets( buffer, 1000, f );
-    while( !feof(f) && fgets( buffer, 1000, f ) != NULL && strcmp(buffer,"\n") != 0 )
+    printf("buffer = %s\n", buffer);
+    while( !feof(f) )
     {
-        int priority = atoi( strtok( buffer, ","));
-        int timeInMinutes = atoi(strtok(NULL,","));
-        int timeInHours = atoi(strtok(NULL, ","));
-        char* name = strtok( NULL, "," );
-        char* description = strtok( NULL, "," );
-        char* dateDue = strtok( NULL, ";" );
-        struct taskNode t = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue);
-        insertNode( t );
+        fgets( buffer, 1000, f );
+        printf("buffer = %s\n", buffer);
+        char* tokens = strtok(buffer, ",");
+        int i = 0;
+        while(i++ < 6)
+        {
+            printf("tokens = %s\n", tokens);
+            tokens = strtok(buffer, ",");
+        }
+        //struct taskNode t = buildNode( priority, timeInMinutes, timeInHours, name, description, dateDue );
+        //insertNode( t );
+        //printf("priority = %d\ntimeInMinutes = %d\ntimeinHours = %d\n, name = %s\n, description = %s\n, dateDue = %s\n",
+                //t.priority, t.timeInMinutes, t.timeInHours, t.name, t.description, t.dateDue );
+                //printNodes();
     }
     printf("\n");
+    //printNodes( );
     fclose( f );
-    //printNodes( 0 );
+    //printf("count == %d\n", count);
+    
     //begin program while loop
     int selection = -1;
 
